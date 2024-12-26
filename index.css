@@ -1,0 +1,44 @@
+#masterDiv {
+    display: grid; /* Grid mode 😎*/
+    grid-template-columns: repeat(4, 1fr); /* This notates the amound of DOM Nodes in column per row */
+    gap: 5px; /* The gab between the buttons in the calculator */
+    width: 300px; /* The width of the container div */
+    padding: 10px; /* The padding of the container div */
+    background-color: #222; /* The background color of the div itself */
+}
+
+#numberBar {
+    grid-column: span 4; /* Spans all 4 columns */
+    background-color: #d3d3d3;
+    text-align: right; /* Aligns the text in the main bar to the right */
+    padding: 10px; /* The padding for the bar itself */
+    font-size: 2rem; /* The font size anchored on the "root M letter width" */
+    border-radius: 5px;
+     overflow: hidden; /* This styling should hide/clip off any part of the element that qualifys are overflow */
+}
+
+.button {
+    font-size: 1.5rem;
+    padding: 10px; /* Padding for all buttons */
+    border: none; /* This removes the default border on buttons */
+    border-radius: 5px;
+    cursor: pointer; /* This changes the pointer from the arrow to pointer mode */
+}
+
+.button.blue {
+    background-color: #4aa3f4;
+    color: white;
+}
+
+.button.orange {
+    background-color: #f4a261;
+    color: white;
+}
+
+.button:hover {
+    filter: brightness(1.1); /* Provides a nice hover over effect over the buttons */
+}
+
+.wide {
+    grid-column: span 2; /* This allows the 0 to be wider by acting on the "wide" class */
+}
