@@ -27,7 +27,6 @@ function isCalculationNeeded() {
     displayedFloat = "0";
     numberBar.textContent = "0";
   } else {
-    // Calculation needed
     calculation();
   }}
 
@@ -40,6 +39,7 @@ function calculation() {
     calculationPayload(result);
   } else if (currentOperator === "addition") {
     let result = parseFloat(primaryFloat) + parseFloat(displayedFloat);
+    console.log([result, primaryFloat, displayedFloat])
     calculationPayload(result);
   } else if (currentOperator === "subtraction") {
     let result = parseFloat(primaryFloat) - parseFloat(displayedFloat);
@@ -53,17 +53,16 @@ function calculationPayload(value) {
   calculationPreviouslyOccured = true;
 }
 
-function clear() {
-  displayedFloat = "0";
-  primaryFloat = "0";
-  numberBar.textContent = "0";
-}
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     switch (button.id) {
       case "clearBtn":
-        clear();
+        displayedFloat = "0";
+        primaryFloat = "0";
+        numberBar.textContent = "0";
+        primaryFloat = null;
+        calculationPreviouslyOccured = false;
         break;
 
       case "divideBtn":
@@ -131,5 +130,7 @@ buttons.forEach((button) => {
 
       case "equalsBtn":
         calculation();
+        primaryFloat = null;
+        calculationPreviouslyOccured = false;
         break;
     }})});
