@@ -7,18 +7,22 @@ let displayedFloat = "0";
 let calculationPreviouslyOccured = false;
 
 function updateCurrentNumb(newValue) {
-  if (calculationPreviouslyOccured === true) {
+  if (calculationPreviouslyOccured === true) { // Allow for operator chaining by clearing the display float
     displayedFloat = "";
     displayedFloat += newValue;
     numberBar.textContent = displayedFloat;
   } else {
-    if (displayedFloat === "0") {
-      displayedFloat = "";
-      displayedFloat += newValue;
-      numberBar.textContent = displayedFloat;
-    } else {
-      displayedFloat += newValue;
-      numberBar.textContent = displayedFloat;
+    const pattern = /\./; 
+    if (pattern.test(displayedFloat) === false && newValue === "."){
+        displayedFloat += newValue;
+        numberBar.textContent = displayedFloat;
+      } else if (displayedFloat === "0") { // Remove 0 as first input
+        displayedFloat = "";
+        displayedFloat += newValue;
+        numberBar.textContent = displayedFloat;
+      } else if (newValue != "."){ // If displayedFloat is not just 0 add the new value
+        displayedFloat += newValue;
+        numberBar.textContent = displayedFloat;
     }}}
 
 function isCalculationNeeded() {
@@ -39,7 +43,6 @@ function calculation() {
     calculationPayload(result);
   } else if (currentOperator === "addition") {
     let result = parseFloat(primaryFloat) + parseFloat(displayedFloat);
-    console.log([result, primaryFloat, displayedFloat])
     calculationPayload(result);
   } else if (currentOperator === "subtraction") {
     let result = parseFloat(primaryFloat) - parseFloat(displayedFloat);
@@ -126,6 +129,7 @@ buttons.forEach((button) => {
         break;
 
       case "floatPointBtn":
+        updateCurrentNumb(".")
         break;
 
       case "equalsBtn":
