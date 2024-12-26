@@ -13,7 +13,7 @@ function updateCurrentNumb(newValue) {
     numberBar.textContent = displayedFloat;
   } else {
     const pattern = /\./; 
-    if (pattern.test(displayedFloat) === false && newValue === "."){
+    if (pattern.test(displayedFloat) === false && newValue === "."){ // Allows for only one floating point dot.
         displayedFloat += newValue;
         numberBar.textContent = displayedFloat;
       } else if (displayedFloat === "0") { // Remove 0 as first input
