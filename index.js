@@ -1,7 +1,7 @@
 const buttons = document.querySelectorAll(".button");
 const numberBar = document.querySelector("#numberBar");
 
-let primaryFloat = null;
+let previousFloat = null;
 let currentOperator;
 let displayedFloat = "0";
 let calculationPreviouslyOccured = false;
@@ -20,14 +20,14 @@ function updateCurrentNumb(newValue) {
         displayedFloat = "";
         displayedFloat += newValue;
         numberBar.textContent = displayedFloat;
-      } else if (newValue != "."){ // If displayedFloat is not just 0 add the new value
+      } else if (newValue != "."){ // If displayedFloat is not 0 add the new value
         displayedFloat += newValue;
         numberBar.textContent = displayedFloat;
     }}}
 
 function isCalculationNeeded() {
-  if (primaryFloat === null) {
-    primaryFloat = displayedFloat;
+  if (previousFloat === null) {
+    previousFloat = displayedFloat;
     displayedFloat = "0";
     numberBar.textContent = "0";
   } else {
@@ -36,16 +36,16 @@ function isCalculationNeeded() {
 
 function calculation() {
   if (currentOperator === "division") {
-    let result = parseFloat(primaryFloat) / parseFloat(displayedFloat);
+    let result = parseFloat(previousFloat) / parseFloat(displayedFloat);
     calculationPayload(result);
   } else if (currentOperator === "multiplication") {
-    let result = parseFloat(primaryFloat) * parseFloat(displayedFloat);
+    let result = parseFloat(previousFloat) * parseFloat(displayedFloat);
     calculationPayload(result);
   } else if (currentOperator === "addition") {
-    let result = parseFloat(primaryFloat) + parseFloat(displayedFloat);
+    let result = parseFloat(previousFloat) + parseFloat(displayedFloat);
     calculationPayload(result);
   } else if (currentOperator === "subtraction") {
-    let result = parseFloat(primaryFloat) - parseFloat(displayedFloat);
+    let result = parseFloat(previousFloat) - parseFloat(displayedFloat);
     calculationPayload(result);
   }}
 
@@ -61,9 +61,9 @@ buttons.forEach((button) => {
     switch (button.id) {
       case "clearBtn":
         displayedFloat = "0";
-        primaryFloat = "0";
+        previousFloat = "0";
         numberBar.textContent = "0";
-        primaryFloat = null;
+        previousFloat = null;
         calculationPreviouslyOccured = false;
         break;
 
@@ -133,7 +133,7 @@ buttons.forEach((button) => {
 
       case "equalsBtn":
         calculation();
-        primaryFloat = null;
+        previousFloat = null;
         calculationPreviouslyOccured = false;
         break;
     }})});
