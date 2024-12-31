@@ -8,8 +8,7 @@ let calculationPreviouslyOccured = false;
 
 function updateCurrentNumb(newValue) {
   if (calculationPreviouslyOccured === true) { // Allow for operator chaining by clearing the display float
-    displayedFloat = "";
-    displayedFloat += newValue;
+    displayedFloat = "" + newValue;
     numberBar.textContent = displayedFloat;
   } else {
     const pattern = /\./; 
