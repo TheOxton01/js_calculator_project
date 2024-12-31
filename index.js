@@ -52,7 +52,6 @@ function calculation() {
 function calculationPayload(value) {
   displayedFloat = `${value}`;
   numberBar.textContent = `${value}`;
-  primaryFloat = `${value}`;
   calculationPreviouslyOccured = true;
 }
 
